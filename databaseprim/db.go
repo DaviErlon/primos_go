@@ -53,7 +53,11 @@ func (r *Repo) GetCountPrim() (int64, error) {
 // Calcula a densidade: limite / quantidade
 func (r *Repo) GetDensiPrim(l int64) (float64, error) {
 
-	countall, _ := r.GetCountPrim()
+	countall, err := r.GetCountPrim()
+	
+	if err != nil {
+		return 0, err
+	}
 
 	// limites para o argumento
 	if l < 2  || l > countall{
@@ -73,7 +77,11 @@ func (r *Repo) GetDensiPrim(l int64) (float64, error) {
 // Gera uma lista até o primo de indice l
 func (r *Repo) GetAtePrim(l int64) (*utilprim.List[int64], error)  {
 	
-	countall, _ := r.GetCountPrim()
+	countall, err := r.GetCountPrim()
+
+	if err != nil {
+		return nil, err
+	}
 
 	// limites
 	if l < 0  || l > countall{
